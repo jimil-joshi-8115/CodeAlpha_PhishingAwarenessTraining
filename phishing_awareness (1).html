@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Awareness Training - CodeAlpha</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; color: #333; }
+  h1 { background: #d32f2f; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+  h2 { color: #d32f2f; border-left: 4px solid #d32f2f; padding-left: 10px; }
+  .card { background: white; border-radius: 8px; padding: 20px; margin: 16px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  .tip     { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 10px 16px; margin: 8px 0; border-radius: 0 6px 6px 0; font-size: 14px; }
+  .warning { background: #fff3e0; border-left: 4px solid #ff9800; padding: 10px 16px; margin: 8px 0; border-radius: 0 6px 6px 0; font-size: 14px; }
+
+  /* TYPE BUTTONS */
+  .type-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .type-btn {
+    padding: 10px 18px; border: 2px solid #d32f2f; background: white;
+    color: #d32f2f; border-radius: 6px; cursor: pointer;
+    font-size: 14px; font-weight: bold; transition: all 0.2s;
+  }
+  .type-btn:hover, .type-btn.active { background: #d32f2f; color: white; }
+
+  /* PANEL */
+  .example-panel { display: none; border: 1px solid #eee; border-radius: 8px; padding: 20px; margin-top: 4px; background: #fafafa; }
+  .example-panel.show { display: block; }
+
+  /* DESCRIPTION BOX */
+  .desc-box { background: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 0 6px 6px 0; padding: 14px 16px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: #1a1a1a; }
+  .desc-box b { color: #1976d2; }
+
+  /* DIVIDER */
+  .ex-label { font-weight: bold; font-size: 14px; color: #555; margin: 16px 0 8px; border-bottom: 1px dashed #ddd; padding-bottom: 6px; }
+
+  /* EMAIL BOX */
+  .email-box { background: white; border: 1px solid #ddd; border-radius: 6px; padding: 16px; font-size: 14px; line-height: 1.7; }
+  .email-box .field { color: #555; margin-bottom: 4px; }
+  .red { color: #d32f2f; font-weight: bold; }
+
+  /* SMS BOX */
+  .sms-box { background: #e8f5e9; border-radius: 16px; padding: 14px 18px; font-size: 14px; max-width: 320px; line-height: 1.6; border: 1px solid #c8e6c9; }
+
+  /* CALL BOX */
+  .call-box { background: #e3f2fd; border-radius: 8px; padding: 14px 18px; font-size: 14px; line-height: 1.8; border: 1px solid #bbdefb; }
+
+  /* WEBSITE BOX */
+  .website-box { background: white; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .website-bar { background: #f0f0f0; padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #ddd; }
+  .website-bar .url { background: white; border: 1px solid #ccc; border-radius: 4px; padding: 4px 10px; font-size: 12px; flex: 1; }
+  .website-body { padding: 16px; }
+
+  /* QUIZ */
+  .quiz-q { font-weight: bold; margin-bottom: 10px; font-size: 15px; }
+  .opt { display: block; background: #f0f0f0; border: 1px solid #ddd; border-radius: 6px; padding: 10px 14px; margin: 6px 0; cursor: pointer; width: 100%; text-align: left; font-size: 14px; font-family: Arial, sans-serif; }
+  .opt:hover:not(:disabled) { background: #e3f2fd; }
+  .opt.correct { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; font-weight: bold; }
+  .opt.wrong   { background: #ffebee; border-color: #f44336; color: #c62828; }
+  .feedback { display: none; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 14px; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: #e8f5e9; color: #2e7d32; }
+  .feedback.no { background: #ffebee; color: #c62828; }
+  .score-box { text-align: center; padding: 30px; background: #fafafa; border-radius: 8px; margin-top: 16px; border: 1px solid #eee; }
+  .score-num { font-size: 48px; font-weight: bold; color: #d32f2f; }
+
+  footer { text-align: center; margin-top: 30px; color: #888; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<h1>🎣 Phishing Awareness Training<br><small style="font-size:14px;font-weight:normal">CodeAlpha Cybersecurity Internship — Task 2</small></h1>
+
+<!-- WHAT IS PHISHING -->
+<div class="card">
+  <h2>What is Phishing?</h2>
+  <p>Phishing is a cyberattack where criminals send fake emails, messages, or create fake websites to trick people into giving away passwords, credit card numbers, or personal information.</p>
+  <div class="warning">⚠️ 91% of all cyberattacks start with a phishing email. Over 3.4 billion phishing emails are sent every single day.</div>
+</div>
+
+<!-- TYPES WITH DESCRIPTION + EXAMPLE -->
+<div class="card">
+  <h2>Types of Phishing — Click to Learn & See Example</h2>
+  <p style="color:#666;font-size:14px;margin-bottom:14px">Click any type to read what it is, how it works, and see a real-world example.</p>
+
+  <div class="type-btns">
+    <button class="type-btn" onclick="showExample('email', this)">📧 Email Phishing</button>
+    <button class="type-btn" onclick="showExample('smishing', this)">📱 Smishing</button>
+    <button class="type-btn" onclick="showExample('vishing', this)">📞 Vishing</button>
+    <button class="type-btn" onclick="showExample('spear', this)">🎯 Spear Phishing</button>
+    <button class="type-btn" onclick="showExample('whaling', this)">🐋 Whaling</button>
+    <button class="type-btn" onclick="showExample('fake', this)">🌐 Fake Website</button>
+  </div>
+
+  <!-- EMAIL PHISHING -->
+  <div class="example-panel" id="ex-email">
+    <h3>📧 Email Phishing</h3>
+    <div class="desc-box">
+      <b>What is it?</b> Email phishing is the most common type of phishing attack. Attackers send fake emails that look like they are from trusted companies — banks, PayPal, Amazon, Google, or even your employer.<br><br>
+      <b>How do they do it?</b> They create email addresses that look almost real (e.g. support@paypa1.com instead of paypal.com). The email usually contains a link to a fake login page where your credentials are stolen the moment you enter them. They use fear, urgency, and official-looking logos to make the email look genuine.<br><br>
+      <b>What do they want?</b> Your username, password, credit card number, OTP, or personal details.
+    </div>
+    <div class="ex-label">📩 Real-World Example — Fake PayPal Email</div>
+    <div class="email-box">
+      <div class="field"><b>From:</b> <span class="red">security@paypa1-support.com</span></div>
+      <div class="field"><b>To:</b> you@gmail.com</div>
+      <div class="field"><b>Subject:</b> <span class="red">URGENT: Your PayPal account is suspended!</span></div>
+      <hr style="border:none;border-top:1px solid #eee;margin:10px 0">
+      <p>Dear <span class="red">Valued Customer</span>,</p>
+      <p>We detected suspicious activity on your account. Verify your details within <span class="red">24 hours</span> or your account will be permanently closed.</p>
+      <p><a href="#" onclick="return false" style="color:#003087;font-weight:bold">🔗 Click here to verify your account now</a></p>
+      <p>Regards,<br>PayPal Security Team</p>
+    </div>
+    <div class="warning">🚩 "paypa1" uses number 1 instead of letter l — fake domain</div>
+    <div class="warning">🚩 "URGENT" + "24 hours" — creates panic so you don't think clearly</div>
+    <div class="warning">🚩 "Valued Customer" — real PayPal always uses your actual name</div>
+    <div class="warning">🚩 Threat of permanent closure — forces you to click without thinking</div>
+  </div>
+
+  <!-- SMISHING -->
+  <div class="example-panel" id="ex-smishing">
+    <h3>📱 Smishing (SMS Phishing)</h3>
+    <div class="desc-box">
+      <b>What is it?</b> Smishing is phishing done through SMS text messages. The word comes from "SMS + Phishing." Attackers send text messages pretending to be from banks, delivery companies, or government agencies.<br><br>
+      <b>How do they do it?</b> They send a short, alarming text with a link. The link goes to a fake website that steals your login credentials or installs malware on your phone. They may also ask you to call a fake number where a scammer awaits.<br><br>
+      <b>What do they want?</b> Bank login details, OTPs, or to install malware on your phone to steal data.
+    </div>
+    <div class="ex-label">📩 Real-World Example — Fake SBI Bank SMS</div>
+    <div class="sms-box">
+      <b>SBI-ALERT:</b> Your account has been temporarily blocked due to suspicious activity. Verify now to avoid permanent suspension:<br><br>
+      <span class="red">http://sbi-verify-now.com/login</span><br><br>
+      — SBI Customer Care
+    </div>
+    <div class="warning">🚩 Real banks NEVER send login links via SMS</div>
+    <div class="warning">🚩 "sbi-verify-now.com" is NOT the official SBI website (onlinesbi.com)</div>
+    <div class="warning">🚩 "Blocked account" creates fear to make you click immediately</div>
+    <div class="tip">✅ Call your bank directly using the number on the back of your card — never use the link in an SMS</div>
+  </div>
+
+  <!-- VISHING -->
+  <div class="example-panel" id="ex-vishing">
+    <h3>📞 Vishing (Voice Phishing)</h3>
+    <div class="desc-box">
+      <b>What is it?</b> Vishing is phishing over a phone call. "Vishing" comes from "Voice + Phishing." Attackers call pretending to be from tech support, your bank, the government (income tax department), or even the police.<br><br>
+      <b>How do they do it?</b> They use caller ID spoofing to make the call look like it is from a real company. They create urgency and fear — claiming your computer has a virus, your account is hacked, or you owe taxes. They then ask for remote access to your computer, your OTP, or a payment to "fix" the issue.<br><br>
+      <b>What do they want?</b> Remote access to your computer, OTPs, bank details, or direct money transfers.
+    </div>
+    <div class="ex-label">📩 Real-World Example — Fake Microsoft Support Call</div>
+    <div class="call-box">
+      <b>Caller:</b> "Hello, this is John from Microsoft Technical Support. We have detected a dangerous virus on your Windows computer. Your files and bank details are at risk right now."<br><br>
+      <b>Caller:</b> "I need you to download a small tool so we can connect to your computer and remove the virus. This is completely free — but you must act NOW before the virus spreads further."<br><br>
+      <b>Caller:</b> "Please give me your Windows login password so I can begin the fix immediately."
+    </div>
+    <div class="warning">🚩 Microsoft NEVER calls you without you contacting them first</div>
+    <div class="warning">🚩 Asking for remote access or your password is always a scam</div>
+    <div class="warning">🚩 "Act NOW" — urgency tactic to stop you from thinking or verifying</div>
+    <div class="tip">✅ Hang up immediately. No company will ever call you unsolicited about a virus on your PC.</div>
+  </div>
+
+  <!-- SPEAR PHISHING -->
+  <div class="example-panel" id="ex-spear">
+    <h3>🎯 Spear Phishing</h3>
+    <div class="desc-box">
+      <b>What is it?</b> Spear phishing is a targeted phishing attack aimed at a specific person. Unlike regular phishing which is sent to thousands of random people, spear phishing is crafted for YOU specifically.<br><br>
+      <b>How do they do it?</b> The attacker first researches you on LinkedIn, Facebook, or your company website. They find your name, job title, employer, city, and colleagues. Then they send a highly personalized email that mentions specific details about your life — making it feel completely genuine and trustworthy.<br><br>
+      <b>What do they want?</b> Your login credentials, Aadhaar/PAN details, bank information, or access to company systems.
+    </div>
+    <div class="ex-label">📩 Real-World Example — Fake Job Offer (researched from LinkedIn)</div>
+    <div class="email-box">
+      <div class="field"><b>From:</b> <span class="red">rahul.hr@infosys-careers.net</span></div>
+      <div class="field"><b>To:</b> priya.patel@gmail.com</div>
+      <div class="field"><b>Subject:</b> Job Offer — Senior Developer at Infosys, Pune</div>
+      <hr style="border:none;border-top:1px solid #eee;margin:10px 0">
+      <p>Hi <b>Priya</b>,</p>
+      <p>I came across your LinkedIn profile and was impressed by your 4 years of Python experience at TCS, Pune. We have a Senior Developer opening at Infosys with ₹18 LPA package.</p>
+      <p>Please fill the attached form with your <span class="red">Aadhaar number and bank account details</span> for our background verification process to proceed.</p>
+      <p>Regards,<br>Rahul Sharma — HR, Infosys</p>
+    </div>
+    <div class="warning">🚩 Uses your real name, employer, city and skills — stolen from LinkedIn</div>
+    <div class="warning">🚩 "infosys-careers.net" is fake — real domain is infosys.com</div>
+    <div class="warning">🚩 No real company asks for Aadhaar + bank details before an interview</div>
+    <div class="tip">✅ Verify job offers directly on the company's official website or call their HR department</div>
+  </div>
+
+  <!-- WHALING -->
+  <div class="example-panel" id="ex-whaling">
+    <h3>🐋 Whaling (CEO Fraud)</h3>
+    <div class="desc-box">
+      <b>What is it?</b> Whaling targets high-value individuals — CEOs, CFOs, directors, or senior managers. The name comes from "going after the big fish." These attacks often result in huge financial losses — sometimes crores of rupees.<br><br>
+      <b>How do they do it?</b> The attacker impersonates the CEO or a senior executive and emails a finance or HR employee. They create a sense of secrecy and urgency — asking for urgent wire transfers, employee salary details, or W-2 tax forms. Since the email appears to come from the boss, employees often comply without questioning.<br><br>
+      <b>What do they want?</b> Large wire transfers, sensitive employee data, or access to company financial systems.
+    </div>
+    <div class="ex-label">📩 Real-World Example — Fake CEO Wire Transfer Request</div>
+    <div class="email-box">
+      <div class="field"><b>From:</b> <span class="red">amit.verma.ceo@techcorp-global.net</span></div>
+      <div class="field"><b>To:</b> sanjay.finance@techcorp.com</div>
+      <div class="field"><b>Subject:</b> Urgent — Confidential Wire Transfer</div>
+      <hr style="border:none;border-top:1px solid #eee;margin:10px 0">
+      <p>Hi Sanjay,</p>
+      <p>I am in a confidential board meeting and cannot take calls right now. I need you to urgently process a wire transfer of <span class="red">₹45,00,000</span> to our new vendor account for a deal closing today.</p>
+      <p>Account: HDFC Bank — 12345678901 | IFSC: HDFC0001234</p>
+      <p><span class="red">Do not discuss this with anyone</span> — it is strictly confidential. I will explain everything when I return.</p>
+      <p>— Amit Verma, CEO</p>
+    </div>
+    <div class="warning">🚩 "techcorp-global.net" is a fake domain — not the real company email</div>
+    <div class="warning">🚩 "Do not discuss with anyone" — isolates the victim to bypass approval process</div>
+    <div class="warning">🚩 Urgency + confidentiality stops the employee from verifying the request</div>
+    <div class="tip">✅ Always verify large transfers via a direct phone call to the sender — never trust email alone</div>
+  </div>
+
+  <!-- FAKE WEBSITE -->
+  <div class="example-panel" id="ex-fake">
+    <h3>🌐 Fake Website (Pharming)</h3>
+    <div class="desc-box">
+      <b>What is it?</b> Fake websites (also called pharming) are websites designed to look exactly like real ones — same logo, same layout, same colors. The only difference is the URL. Victims are sent to these sites via phishing emails, SMS links, or even search engine ads.<br><br>
+      <b>How do they do it?</b> Attackers buy a domain that looks similar to the real one (e.g. hdfcbank-login.com instead of hdfcbank.com) and copy the entire design of the real website. When you enter your username and password, it goes directly to the attacker. Some advanced attacks even intercept DNS requests to redirect you to a fake site even when you type the correct URL.<br><br>
+      <b>What do they want?</b> Your bank login, credit card details, or any account credentials.
+    </div>
+    <div class="ex-label">📩 Real-World Example — Fake HDFC Bank Login Page</div>
+    <div class="website-box">
+      <div class="website-bar">
+        <span style="color:#d32f2f;font-size:16px">🔴</span>
+        <div class="url"><span class="red">http://</span>hdfc-bank-login.com/secure/netbanking</div>
+      </div>
+      <div class="website-body">
+        <h3 style="color:#004c8c;margin:0 0 4px">HDFC Bank — NetBanking Login</h3>
+        <p style="font-size:12px;color:#888;margin:0 0 16px">Secure Customer Portal</p>
+        <div style="margin-bottom:10px">
+          <label style="font-size:13px;display:block;margin-bottom:4px">Customer ID</label>
+          <input type="text" placeholder="Enter Customer ID" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="font-size:13px;display:block;margin-bottom:4px">Password</label>
+          <input type="password" placeholder="Enter Password" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+        </div>
+        <button style="background:#004c8c;color:white;border:none;padding:10px;width:100%;border-radius:4px;font-size:14px;cursor:pointer">Login →</button>
+      </div>
+    </div>
+    <div class="warning">🚩 URL is "hdfc-bank-login.com" — the real site is "hdfcbank.com"</div>
+    <div class="warning">🚩 Uses HTTP not HTTPS — no padlock icon means not secure</div>
+    <div class="warning">🚩 Looks identical to the real website — very convincing to victims</div>
+    <div class="tip">✅ Always check the full URL before entering any login details</div>
+    <div class="tip">✅ Bookmark your bank's official website and always use that bookmark</div>
+  </div>
+
+</div>
+
+<!-- BEST PRACTICES -->
+<div class="card">
+  <h2>How to Stay Safe</h2>
+  <div class="tip">✅ Always check the sender's full email address carefully — not just the display name</div>
+  <div class="tip">✅ Never click links in emails or SMS — type the website address directly in your browser</div>
+  <div class="tip">✅ Enable Two-Factor Authentication (2FA) on all important accounts</div>
+  <div class="tip">✅ Never share your password, OTP, or Aadhaar number via email, SMS, or phone</div>
+  <div class="tip">✅ When in doubt, call the company directly using their official number from their website</div>
+  <div class="tip">✅ Report suspicious emails to your IT department immediately</div>
+  <div class="tip">✅ Keep your browser, antivirus, and operating system updated at all times</div>
+</div>
+
+<!-- QUIZ -->
+<div class="card">
+  <h2>Quick Quiz — Test Your Knowledge</h2>
+  <p style="color:#666;font-size:14px;margin-bottom:20px">Answer all 3 questions based on what you learned above.</p>
+
+  <div id="quiz-area">
+    <div style="margin-bottom:24px">
+      <div class="quiz-q">Q1. You receive an SMS from "SBI-ALERT" with a link to verify your account. What do you do?</div>
+      <button class="opt" onclick="answer(1,0,false)">A. Click the link and log in to verify</button>
+      <button class="opt" onclick="answer(1,1,true)">B. Ignore the SMS and call SBI directly using the number on your card</button>
+      <button class="opt" onclick="answer(1,2,false)">C. Forward the SMS to your friends to warn them</button>
+      <div class="feedback" id="fb1"></div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="quiz-q">Q2. A caller says he is from Microsoft Support and your PC has a virus. He wants remote access. What do you do?</div>
+      <button class="opt" onclick="answer(2,0,false)">A. Allow remote access — it sounds serious</button>
+      <button class="opt" onclick="answer(2,1,false)">B. Give him your Windows password so he can fix it</button>
+      <button class="opt" onclick="answer(2,2,true)">C. Hang up immediately — Microsoft never calls you unsolicited</button>
+      <div class="feedback" id="fb2"></div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="quiz-q">Q3. Your CEO emails you asking for an urgent wire transfer and says "do not tell anyone." What do you do?</div>
+      <button class="opt" onclick="answer(3,0,false)">A. Transfer the money immediately since it is from the CEO</button>
+      <button class="opt" onclick="answer(3,1,true)">B. Call the CEO directly on his official phone number to verify before doing anything</button>
+      <button class="opt" onclick="answer(3,2,false)">C. Reply to the email asking for more details</button>
+      <div class="feedback" id="fb3"></div>
+    </div>
+  </div>
+
+  <div class="score-box" id="score-box" style="display:none">
+    <div class="score-num" id="score-num"></div>
+    <p id="score-msg" style="font-size:16px;color:#555;margin-top:8px"></p>
+    <button class="opt" style="max-width:180px;margin:16px auto 0" onclick="location.reload()">🔄 Try Again</button>
+  </div>
+</div>
+
+<footer>
+  CodeAlpha Cybersecurity Internship — Task 2: Phishing Awareness Training<br>
+  © 2026 CodeAlpha | www.codealpha.tech
+</footer>
+
+<script>
+  function showExample(type, btn) {
+    document.querySelectorAll('.example-panel').forEach(p => p.classList.remove('show'));
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('ex-' + type).classList.add('show');
+    btn.classList.add('active');
+    document.getElementById('ex-' + type).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  let score = 0, answered = 0;
+  const correctIdx = [1, 2, 1];
+
+  function answer(qNum, optIdx, isCorrect) {
+    const container = document.querySelectorAll('#quiz-area > div')[qNum - 1];
+    const opts = container.querySelectorAll('.opt');
+    opts.forEach(o => o.disabled = true);
+    const fb = document.getElementById('fb' + qNum);
+    fb.classList.add('show');
+    if (isCorrect) {
+      opts[optIdx].classList.add('correct');
+      fb.classList.add('ok');
+      fb.textContent = '✅ Correct! Well done.';
+      score++;
+    } else {
+      opts[optIdx].classList.add('wrong');
+      opts[correctIdx[qNum - 1]].classList.add('correct');
+      fb.classList.add('no');
+      fb.textContent = '❌ Incorrect. The correct answer is highlighted in green above.';
+    }
+    answered++;
+    if (answered === 3) setTimeout(showScore, 900);
+  }
+
+  function showScore() {
+    document.getElementById('score-box').style.display = 'block';
+    document.getElementById('score-num').textContent = score + ' / 3';
+    const msgs = [
+      'Keep studying! Go back and read each section carefully.',
+      'Good effort! Review the sections you got wrong.',
+      'Excellent! You are fully phishing-aware! 🎉'
+    ];
+    document.getElementById('score-msg').textContent = msgs[score - 1] || msgs[0];
+    document.getElementById('score-box').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
